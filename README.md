@@ -24,4 +24,4 @@ Requesting location permission: [location_permissions](https://pub.dev/packages/
 
 ## License
 
-MIT
+This open source project, and the license is BSD.
