@@ -1,3 +1,7 @@
+## 1.0.3
+
+* Updated more documentation
+
 ## 1.0.2
 
 * Removed android log
