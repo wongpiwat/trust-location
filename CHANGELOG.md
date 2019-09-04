@@ -1,3 +1,7 @@
+## 1.0.4
+
+* Updated pubspec file
+
 ## 1.0.3
 
 * Updated more documentation
