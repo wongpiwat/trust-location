@@ -42,7 +42,7 @@ public class TrustLocationPlugin extends FlutterActivity implements MethodCallHa
                 result.success(false);
             } else {
                 locationAssistantListener = new LocationAssistantListener(context);
-                result.error("UNAVAILABLE", "Error", null);
+                result.success(false);
             }
         } else if (call.method.equals("getLocation")) {
             if (locationAssistantListener.isMockLocationsDetected()) {
@@ -51,7 +51,7 @@ public class TrustLocationPlugin extends FlutterActivity implements MethodCallHa
                 result.success("Latitude: " + locationAssistantListener.getLatitude() + ", Longitude: " + locationAssistantListener.getLongitude());
             } else {
                 locationAssistantListener = new LocationAssistantListener(context);
-                result.error("UNAVAILABLE", "Error", null);
+                result.success("Initialize Location");
             }
         } else {
             result.notImplemented();
@@ -73,7 +73,7 @@ public class TrustLocationPlugin extends FlutterActivity implements MethodCallHa
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         if (locationAssistantListener.getAssistant().onPermissionsUpdated(requestCode, grantResults)) {
-            io.flutter.Log.i("i", "requestCode: " + requestCode);
+//            io.flutter.Log.i("i", "requestCode: " + requestCode);
         }
     }
 }
@@ -121,7 +121,6 @@ class LocationAssistantListener implements LocationAssistant.Listener {
 
     @Override
     public void onNewLocationAvailable(Location location) {
-        Log.i("LO", "location " + location);
         if (location == null) return;
         latitude = location.getLatitude() + "";
         longitude = location.getLongitude() + "";
@@ -130,7 +129,6 @@ class LocationAssistantListener implements LocationAssistant.Listener {
 
     @Override
     public void onMockLocationsDetected(View.OnClickListener fromView, DialogInterface.OnClickListener fromDialog) {
-        io.flutter.Log.i("i", "MockLocation");
         isMockLocationsDetected = true;
     }
 
