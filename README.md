@@ -16,27 +16,6 @@ bool isMockLocation = await TrustLocation.isMockLocation;
 ...
 ```
 
-> **NOTE:** The location_permissions plugin uses the AndroidX version of the Android Support Libraries. This means you need to make sure your Android project is also upgraded to support AndroidX. Detailed instructions can be found [here](https://flutter.dev/docs/development/packages-and-plugins/androidx-compatibility).
->
->The TL;DR version is:
->
->1. Add the following to your "gradle.properties" file:
->
->```
->android.useAndroidX=true
->android.enableJetifier=true
->```
->2. Make sure you set the `compileSdkVersion` in your "android/app/build.gradle" file to 28:
->
->```
->android {
->  compileSdkVersion 28
->
->  ...
->}
->```
->3. Make sure you replace all the `android.` dependencies to their AndroidX counterparts (a full list can be found here: https://developer.android.com/jetpack/androidx/migrate).
-
 ## Permissions
 
 ### Android
@@ -47,6 +26,8 @@ Add either the `ACCESS_COARSE_LOCATION` or the `ACCESS_FINE_LOCATION` permission
 <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 ```
+
+> **NOTE:** This plugin uses the AndroidX version of the Android Support Libraries. Detailed instructions can be found [here](https://flutter.dev/docs/development/packages-and-plugins/androidx-compatibility).
 
 ## Example
 
