@@ -1,3 +1,7 @@
+## 1.0.5
+
+* Fixed missing dependencies to migrate to AndroidX libraries
+
 ## 1.0.4
 
 * Updated pubspec file

@@ -111,7 +111,7 @@ class LocationAssistantListener implements LocationAssistant.Listener {
 
     @Override
     public void onNeedLocationSettingsChange() {
-        io.flutter.Log.i("i", "onNeedLocationSettingsChange: ");
+        io.flutter.Log.i("i", "LocationSettingsStatusCodes.RESOLUTION_REQUIRED: Please Turn on GPS location service.");
     }
 
     @Override
