@@ -24,7 +24,7 @@ Add either the `ACCESS_COARSE_LOCATION` or the `ACCESS_FINE_LOCATION` permission
 ```dart
 import 'package:trust_location/trust_location.dart';
 ...
-Position position = await TrustLocation.getLatLong;
+LatLongPosition position = await TrustLocation.getLatLong;
 bool isMockLocation = await TrustLocation.isMockLocation;
 ...
 ```
