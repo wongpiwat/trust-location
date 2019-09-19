@@ -44,11 +44,16 @@ public class TrustLocationPlugin extends FlutterActivity implements MethodCallHa
                 locationAssistantListener = new LocationAssistantListener(context);
                 result.success(false);
             }
-        } else if (call.method.equals("getLocation")) {
-            if (locationAssistantListener.isMockLocationsDetected()) {
-                result.success("Mock Location");
-            } else if (locationAssistantListener.getLatitude() != null && locationAssistantListener.getLongitude() != null) {
-                result.success("Latitude: " + locationAssistantListener.getLatitude() + ", Longitude: " + locationAssistantListener.getLongitude());
+        } else if (call.method.equals("getLatitude")) {
+            if (locationAssistantListener.getLatitude() != null) {
+                result.success(locationAssistantListener.getLatitude());
+            } else {
+                locationAssistantListener = new LocationAssistantListener(context);
+                result.success("Initialize Location");
+            }
+        } else if (call.method.equals("getLongitude")) {
+            if (locationAssistantListener.getLongitude() != null) {
+                result.success(locationAssistantListener.getLongitude());
             } else {
                 locationAssistantListener = new LocationAssistantListener(context);
                 result.success("Initialize Location");

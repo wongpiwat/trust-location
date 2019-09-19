@@ -6,16 +6,6 @@ Demonstrates how to use the trust_location plugin.
 
 This project is a starting point for a Flutter application.
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
-
-
 ## Example
 
 ```dart
@@ -35,7 +25,8 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
-  String _location = "None";
+  String _latitude;
+  String _longitude;
   bool _isMockLocation = false;
   Timer getLocationCallback;
 
@@ -53,16 +44,17 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
   }
 
   Future<void> _getLocation() async {
-    String location;
+    Position position;
     bool isMockLocation;
     try {
-      location = await TrustLocation.getLocation;
+      position = await TrustLocation.getLatLong;
       isMockLocation = await TrustLocation.isMockLocation;
-    } on PlatformException catch(e) {
+    } on PlatformException catch (e) {
       print('PlatformException $e');
     }
     setState(() {
-      _location = location;
+      _latitude = position.latitude;
+      _longitude = position.longitude;
       _isMockLocation = isMockLocation;
     });
   }
@@ -80,7 +72,7 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
               child: Column(
             children: <Widget>[
               Text('Mock Location: $_isMockLocation'),
-              Text('$_location'),
+              Text('Latitude: $_latitude, Longitude: $_longitude'),
             ],
           )),
         ),

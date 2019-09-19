@@ -24,7 +24,7 @@ Add either the `ACCESS_COARSE_LOCATION` or the `ACCESS_FINE_LOCATION` permission
 ```dart
 import 'package:trust_location/trust_location.dart';
 ...
-String location = await TrustLocation.getLocation;
+Position position = await TrustLocation.getLatLong;
 bool isMockLocation = await TrustLocation.isMockLocation;
 ...
 ```
@@ -48,7 +48,8 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
-  String _location = "None";
+  String _latitude;
+  String _longitude;
   bool _isMockLocation = false;
   Timer getLocationCallback;
 
@@ -66,16 +67,17 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
   }
 
   Future<void> _getLocation() async {
-    String location;
+    Position position;
     bool isMockLocation;
     try {
-      location = await TrustLocation.getLocation;
+      position = await TrustLocation.getLatLong;
       isMockLocation = await TrustLocation.isMockLocation;
-    } on PlatformException catch(e) {
+    } on PlatformException catch (e) {
       print('PlatformException $e');
     }
     setState(() {
-      _location = location;
+      _latitude = position.latitude;
+      _longitude = position.longitude;
       _isMockLocation = isMockLocation;
     });
   }
@@ -93,7 +95,7 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
               child: Column(
             children: <Widget>[
               Text('Mock Location: $_isMockLocation'),
-              Text('$_location'),
+              Text('Latitude: $_latitude, Longitude: $_longitude'),
             ],
           )),
         ),

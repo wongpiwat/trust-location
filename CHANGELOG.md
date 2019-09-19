@@ -1,3 +1,7 @@
+## 2.0.0
+
+* Used the Position class for storing latitude and longitude.
+
 ## 1.0.5
 
 * Fixed missing dependencies to migrate to AndroidX libraries
