@@ -1,6 +1,6 @@
-# trust_location_example
+# Trust Location Example
 
-Demonstrates how to use the trust_location plugin.
+Demonstrates how to use the Trust Location plugin.
 
 ## Getting Started
 
