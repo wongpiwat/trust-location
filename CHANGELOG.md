@@ -1,3 +1,7 @@
+## 2.0.1
+
+* Changed the Position class to LatLongPosition class.
+
 ## 2.0.0
 
 * Used the Position class for storing latitude and longitude.

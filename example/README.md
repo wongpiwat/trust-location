@@ -44,7 +44,7 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
   }
 
   Future<void> _getLocation() async {
-    Position position;
+    LatLongPosition position;
     bool isMockLocation;
     try {
       position = await TrustLocation.getLatLong;

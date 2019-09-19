@@ -5,10 +5,10 @@ import 'package:flutter/services.dart';
 class TrustLocation {
   static const MethodChannel _channel = const MethodChannel('trust_location');
 
-  static Future<Position> get getLatLong async {
+  static Future<LatLongPosition> get getLatLong async {
     final String latitude = await _channel.invokeMethod('getLatitude');
     final String longitude = await _channel.invokeMethod('getLongitude');
-    return Position(latitude, longitude);
+    return LatLongPosition(latitude, longitude);
   }
 
   static Future<bool> get isMockLocation async {
@@ -17,11 +17,11 @@ class TrustLocation {
   }
 }
 
-class Position {
+class LatLongPosition {
   final String _latitude;
   final String _longitude;
 
-  Position([this._latitude, this._longitude])
+  LatLongPosition([this._latitude, this._longitude])
       : assert(_latitude != null),
         assert(_longitude != null);
 
