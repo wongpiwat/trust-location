@@ -1,3 +1,7 @@
+## 2.0.2
+
+* Updated pubspec and readme
+
 ## 2.0.1
 
 * Changed the Position class to LatLongPosition class.
