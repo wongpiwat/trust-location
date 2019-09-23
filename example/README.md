@@ -28,18 +28,18 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
   String _latitude;
   String _longitude;
   bool _isMockLocation = false;
-  Timer getLocationCallback;
+  Timer getLocationTimer;
 
   @override
   void initState() {
     super.initState();
     WidgetsBinding.instance.addObserver(this);
     getLocationPermission();
-    executeGetLocationCallback();
+    executeGetLocation();
   }
 
-  void executeGetLocationCallback() {
-    getLocationCallback =
+  void executeGetLocation() {
+    getLocationTimer =
         Timer.periodic(Duration(seconds: 5), (Timer t) => _getLocation());
   }
 
@@ -89,10 +89,10 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
     if (state == AppLifecycleState.resumed) {
-      executeGetLocationCallback();
+      executeGetLocation();
     }
     if (state == AppLifecycleState.inactive) {
-      getLocationCallback.cancel();
+      getLocationTimer.cancel();
     }
   }
 

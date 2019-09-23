@@ -1,3 +1,7 @@
+## 2.0.3
+
+* Updated example code
+
 ## 2.0.2
 
 * Updated pubspec and readme
