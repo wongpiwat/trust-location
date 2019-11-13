@@ -1,6 +1,6 @@
 # Trust Location
 
-A Flutter plugin for detecting the mock location of the Android device.
+A Flutter plugin for detecting the mock location of the Android devices.
 
 ## Installation
 
