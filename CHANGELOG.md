@@ -1,3 +1,7 @@
+## 2.0.4
+
+* Fixed installing two apps at the same time
+
 ## 2.0.3
 
 * Updated example code
