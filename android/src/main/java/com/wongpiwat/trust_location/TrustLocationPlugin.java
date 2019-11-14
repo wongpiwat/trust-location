@@ -78,7 +78,7 @@ public class TrustLocationPlugin extends FlutterActivity implements MethodCallHa
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         if (locationAssistantListener.getAssistant().onPermissionsUpdated(requestCode, grantResults)) {
-//            io.flutter.Log.i("i", "requestCode: " + requestCode);
+            //io.flutter.Log.i("i", "requestCode: " + requestCode);
         }
     }
 }

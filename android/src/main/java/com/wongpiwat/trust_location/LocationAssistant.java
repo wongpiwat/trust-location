@@ -488,7 +488,8 @@ public class LocationAssistant
     }
 
     protected void checkInitialLocation() {
-        if (!googleApiClient.isConnected() || !permissionGranted || !locationRequested || !locationStatusOk) return;
+        if (!googleApiClient.isConnected() || !permissionGranted || !locationRequested || !locationStatusOk)
+            return;
         try {
             Location location = LocationServices.FusedLocationApi.getLastLocation(googleApiClient);
             onLocationChanged(location);
@@ -698,8 +699,7 @@ public class LocationAssistant
         if (location == null) return;
         boolean plausible = isLocationPlausible(location);
         if (verbose && !quiet)
-//            Log.i(getClass().getSimpleName(), location.toString() +
-//                    (plausible ? " -> plausible" : " -> not plausible"));
+            //Log.i(getClass().getSimpleName(), location.toString() + (plausible ? " -> plausible" : " -> not plausible"));
 
         if (!allowMockLocations && !plausible) {
             if (listener != null) listener.onMockLocationsDetected(onGoToDevSettingsFromView,

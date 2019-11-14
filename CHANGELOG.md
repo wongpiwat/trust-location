@@ -1,3 +1,8 @@
+## 2.0.6
+
+* Refactor request permission and location method.
+* Update example code in readme.
+
 ## 2.0.5
 
 * Add doc comments and refactor example code.
