@@ -30,19 +30,22 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
   bool _isMockLocation = false;
   Timer getLocationTimer;
 
+  /// initialize state.
   @override
   void initState() {
     super.initState();
     WidgetsBinding.instance.addObserver(this);
-    getLocationPermission();
+    requestLocationPermission();
     executeGetLocation();
   }
 
+  /// calling get location every 5 seconds.
   void executeGetLocation() {
     getLocationTimer =
         Timer.periodic(Duration(seconds: 5), (Timer t) => _getLocation());
   }
 
+  /// get location method, use a try/catch PlatformException.
   Future<void> _getLocation() async {
     LatLongPosition position;
     bool isMockLocation;
@@ -57,6 +60,31 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
       _longitude = position.longitude;
       _isMockLocation = isMockLocation;
     });
+  }
+
+  /// request location permission at runtime.
+  void requestLocationPermission() async {
+    PermissionStatus permission =
+        await LocationPermissions().requestPermissions();
+    print('permissions: $permission');
+  }
+
+  /// check app state resume or inactive.
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    if (state == AppLifecycleState.resumed) {
+      executeGetLocation();
+    }
+    if (state == AppLifecycleState.inactive) {
+      getLocationTimer.cancel();
+    }
+  }
+
+  /// unregister the WidgetsBindingObserver.
+  @override
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    super.dispose();
   }
 
   @override
@@ -78,28 +106,6 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
         ),
       ),
     );
-  }
-
-  void getLocationPermission() async {
-    PermissionStatus permission =
-        await LocationPermissions().requestPermissions();
-    print('permissions: $permission');
-  }
-
-  @override
-  void didChangeAppLifecycleState(AppLifecycleState state) {
-    if (state == AppLifecycleState.resumed) {
-      executeGetLocation();
-    }
-    if (state == AppLifecycleState.inactive) {
-      getLocationTimer.cancel();
-    }
-  }
-
-  @override
-  void dispose() {
-    WidgetsBinding.instance.removeObserver(this);
-    super.dispose();
   }
 }
 ```
