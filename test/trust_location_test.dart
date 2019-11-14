@@ -7,7 +7,7 @@ void main() {
 
   setUp(() {
     channel.setMockMethodCallHandler((MethodCall methodCall) async {
-      return '42';
+      return false;
     });
   });
 
@@ -15,4 +15,7 @@ void main() {
     channel.setMockMethodCallHandler(null);
   });
 
+  test('getNotMockLocation', () async {
+    expect(await TrustLocation.isMockLocation, false);
+  });
 }

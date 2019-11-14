@@ -1,45 +1,49 @@
+## 2.0.5
+
+* Add doc comments and refactor example code.
+
 ## 2.0.4
 
-* Fixed installing two apps at the same time
+* Fix installing two apps at the same time.
 
 ## 2.0.3
 
-* Updated example code
+* Add example code.
 
 ## 2.0.2
 
-* Updated pubspec and readme
+* Update pubspec and readme.
 
 ## 2.0.1
 
-* Changed the Position class to LatLongPosition class.
+* Change the Position class to LatLongPosition class.
 
 ## 2.0.0
 
-* Used the Position class for storing latitude and longitude.
+* Add the Position class for storing latitude and longitude.
 
 ## 1.0.5
 
-* Fixed missing dependencies to migrate to AndroidX libraries
+* Fix missing dependencies to migrate to AndroidX libraries.
 
 ## 1.0.4
 
-* Updated pubspec file
+* Update pubspec file.
 
 ## 1.0.3
 
-* Updated more documentation
+* Update more documentation.
 
 ## 1.0.2
 
-* Removed android log
-* Fixed method call issues
+* Remove android log
+* Fix method call issues.
 
 ## 1.0.1
 
-* Updated documentation
+* Update documentation.
 
 
 ## 1.0.0
 
-* Initial release
+* Initial release.
