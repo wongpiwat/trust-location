@@ -1,6 +1,6 @@
 # Trust Location
 
-A Flutter plugin for detecting the mock location of the Android devices.
+A Flutter plugin for detecting mock location on Android device.
 
 ## Installation
 
@@ -24,7 +24,13 @@ Add either the `ACCESS_COARSE_LOCATION` or the `ACCESS_FINE_LOCATION` permission
 ```dart
 import 'package:trust_location/trust_location.dart';
 ...
+
+/* Assuming in an async function */
+
+/// query the current location.
 LatLongPosition position = await TrustLocation.getLatLong;
+
+/// check mock location on Android device.
 bool isMockLocation = await TrustLocation.isMockLocation;
 ...
 ```
@@ -136,8 +142,6 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
 ## Credits
 
 Detecting the mock location: [LocationAssistant](https://github.com/klaasnotfound/LocationAssistant)
-
-Requesting location permission: [location_permissions](https://pub.dev/packages/location_permissions)
 
 ## Issues
 

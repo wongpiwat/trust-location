@@ -1,3 +1,7 @@
+## 2.0.7
+
+* Refactor doc comments and documentation.
+
 ## 2.0.6
 
 * Refactor request permission and location method.

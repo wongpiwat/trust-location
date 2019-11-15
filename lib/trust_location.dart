@@ -5,14 +5,14 @@ import 'package:flutter/services.dart';
 class TrustLocation {
   static const MethodChannel _channel = const MethodChannel('trust_location');
 
-  /// get latitude and longitude.
+  /// query the current location.
   static Future<LatLongPosition> get getLatLong async {
     final String latitude = await _channel.invokeMethod('getLatitude');
     final String longitude = await _channel.invokeMethod('getLongitude');
     return LatLongPosition(latitude, longitude);
   }
 
-  /// check mock location on an Android device.
+  /// check mock location on Android device.
   static Future<bool> get isMockLocation async {
     final bool isMock = await _channel.invokeMethod('isMockLocation');
     return isMock;
