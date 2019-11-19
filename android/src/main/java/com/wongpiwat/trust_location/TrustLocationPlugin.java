@@ -18,8 +18,8 @@ import io.flutter.plugin.common.MethodChannel.Result;
  * TrustLocationPlugin
  */
 public class TrustLocationPlugin extends FlutterActivity implements MethodCallHandler {
-    LocationAssistantListener locationAssistantListener;
-    private Context context;
+    private LocationAssistantListener locationAssistantListener;
+    private final Context context;
     /**
      * Plugin registration.
      */
@@ -35,31 +35,36 @@ public class TrustLocationPlugin extends FlutterActivity implements MethodCallHa
 
     @Override
     public void onMethodCall(MethodCall call, @NonNull Result result) {
-        if (call.method.equals("isMockLocation")) {
-            if (locationAssistantListener.isMockLocationsDetected()) {
-                result.success(true);
-            } else if (locationAssistantListener.getLatitude() != null && locationAssistantListener.getLongitude() != null) {
-                result.success(false);
-            } else {
-                locationAssistantListener = new LocationAssistantListener(context);
-                result.success(false);
-            }
-        } else if (call.method.equals("getLatitude")) {
-            if (locationAssistantListener.getLatitude() != null) {
-                result.success(locationAssistantListener.getLatitude());
-            } else {
-                locationAssistantListener = new LocationAssistantListener(context);
-                result.success("Initialize Location");
-            }
-        } else if (call.method.equals("getLongitude")) {
-            if (locationAssistantListener.getLongitude() != null) {
-                result.success(locationAssistantListener.getLongitude());
-            } else {
-                locationAssistantListener = new LocationAssistantListener(context);
-                result.success("Initialize Location");
-            }
-        } else {
-            result.notImplemented();
+        switch (call.method) {
+            case "isMockLocation":
+                if (locationAssistantListener.isMockLocationsDetected()) {
+                    result.success(true);
+                } else if (locationAssistantListener.getLatitude() != null && locationAssistantListener.getLongitude() != null) {
+                    result.success(false);
+                } else {
+                    locationAssistantListener = new LocationAssistantListener(context);
+                    result.success(true);
+                }
+                break;
+            case "getLatitude":
+                if (locationAssistantListener.getLatitude() != null) {
+                    result.success(locationAssistantListener.getLatitude());
+                } else {
+                    locationAssistantListener = new LocationAssistantListener(context);
+                    result.success(null);
+                }
+                break;
+            case "getLongitude":
+                if (locationAssistantListener.getLongitude() != null) {
+                    result.success(locationAssistantListener.getLongitude());
+                } else {
+                    locationAssistantListener = new LocationAssistantListener(context);
+                    result.success(null);
+                }
+                break;
+            default:
+                result.notImplemented();
+                break;
         }
     }
 
@@ -77,20 +82,15 @@ public class TrustLocationPlugin extends FlutterActivity implements MethodCallHa
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        if (locationAssistantListener.getAssistant().onPermissionsUpdated(requestCode, grantResults)) {
-            //io.flutter.Log.i("i", "requestCode: " + requestCode);
-        }
+        locationAssistantListener.getAssistant().onPermissionsUpdated(requestCode, grantResults);//io.flutter.Log.i("i", "requestCode: " + requestCode);
     }
 }
 
 class LocationAssistantListener implements LocationAssistant.Listener {
-    private LocationAssistant assistant;
-
+    private final LocationAssistant assistant;
+    private boolean isMockLocationsDetected = false;
     private String latitude;
     private String longitude;
-
-
-    private boolean isMockLocationsDetected = false;
 
     public LocationAssistantListener(Context context) {
         assistant = new LocationAssistant(context, this, LocationAssistant.Accuracy.HIGH, 5000, false);
