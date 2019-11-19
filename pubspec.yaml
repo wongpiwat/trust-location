@@ -1,6 +1,6 @@
 name: trust_location
 description: A Flutter plugin for detecting mock location on Android device.
-version: 2.0.7
+version: 2.0.8
 author: Wongpiwat Sa-ngiam <wongpiwat153@gmail.com>
 homepage: https://github.com/wongpiwat/flutter-trust-location
 

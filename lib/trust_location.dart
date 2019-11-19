@@ -23,9 +23,7 @@ class LatLongPosition {
   final String _latitude;
   final String _longitude;
 
-  LatLongPosition([this._latitude, this._longitude])
-      : assert(_latitude != null),
-        assert(_longitude != null);
+  LatLongPosition([this._latitude, this._longitude]);
 
   /// get latitude.
   String get latitude => _latitude;
