@@ -139,7 +139,7 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
 }
 ```
 
-## Credits
+## Credit
 
 Detecting the mock location: [LocationAssistant](https://github.com/klaasnotfound/LocationAssistant)
 
