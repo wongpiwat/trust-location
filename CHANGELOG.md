@@ -1,3 +1,10 @@
+## 2.0.8
+
+* Fix condition within `onMethodCall` method.
+* Fix latitude and longitude return value.
+* Bump Gradle 5.4.1 and dependencies.
+* Upgrade to Android SDK 29.
+
 ## 2.0.7
 
 * Refactor doc comments and documentation.

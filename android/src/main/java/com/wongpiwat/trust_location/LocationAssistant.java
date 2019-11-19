@@ -177,12 +177,12 @@ public class LocationAssistant
     private final int REQUEST_LOCATION_PERMISSION = 1;
 
     // Parameters
-    protected Context context;
+    private final Context context;
     private AppCompatActivity activity;
     private Listener listener;
-    private int priority;
-    private long updateInterval;
-    private boolean allowMockLocations;
+    private final int priority;
+    private final long updateInterval;
+    private final boolean allowMockLocations;
     private boolean verbose;
     private boolean quiet;
 
@@ -192,7 +192,7 @@ public class LocationAssistant
     private boolean locationStatusOk;
     private boolean changeSettings;
     private boolean updatesRequested;
-    protected Location bestLocation;
+    private Location bestLocation;
     private GoogleApiClient googleApiClient;
     private LocationRequest locationRequest;
     private Status locationStatus;
@@ -441,7 +441,7 @@ public class LocationAssistant
         }
     }
 
-    protected void acquireLocation() {
+    private void acquireLocation() {
         if (!permissionGranted) checkLocationPermission();
         if (!permissionGranted) {
             if (numTimesPermissionDeclined >= 2) return;
@@ -487,7 +487,7 @@ public class LocationAssistant
         }
     }
 
-    protected void checkInitialLocation() {
+    private void checkInitialLocation() {
         if (!googleApiClient.isConnected() || !permissionGranted || !locationRequested || !locationStatusOk)
             return;
         try {
@@ -507,14 +507,7 @@ public class LocationAssistant
         // Starting with API level >= 18 we can (partially) rely on .isFromMockProvider()
         // (http://developer.android.com/reference/android/location/Location.html#isFromMockProvider%28%29)
         // For API level < 18 we have to check the Settings.Secure flag
-        if (Build.VERSION.SDK_INT < 18 &&
-                !Settings.Secure.getString(context.getContentResolver(), Settings
-                        .Secure.ALLOW_MOCK_LOCATION).equals("0")) {
-            mockLocationsEnabled = true;
-            if (listener != null)
-                listener.onMockLocationsDetected(onGoToDevSettingsFromView, onGoToDevSettingsFromDialog);
-        } else
-            mockLocationsEnabled = false;
+        mockLocationsEnabled = false;
     }
 
     private void checkLocationPermission() {
@@ -580,7 +573,7 @@ public class LocationAssistant
         }
     }
 
-    private DialogInterface.OnClickListener onGoToLocationSettingsFromDialog = new DialogInterface.OnClickListener() {
+    private final DialogInterface.OnClickListener onGoToLocationSettingsFromDialog = new DialogInterface.OnClickListener() {
         @Override
         public void onClick(DialogInterface dialog, int which) {
             if (activity != null) {
@@ -593,7 +586,7 @@ public class LocationAssistant
         }
     };
 
-    private View.OnClickListener onGoToLocationSettingsFromView = new View.OnClickListener() {
+    private final View.OnClickListener onGoToLocationSettingsFromView = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
             if (activity != null) {
@@ -606,7 +599,7 @@ public class LocationAssistant
         }
     };
 
-    private DialogInterface.OnClickListener onGoToDevSettingsFromDialog = new DialogInterface.OnClickListener() {
+    private final DialogInterface.OnClickListener onGoToDevSettingsFromDialog = new DialogInterface.OnClickListener() {
         @Override
         public void onClick(DialogInterface dialog, int which) {
             if (activity != null) {
@@ -619,7 +612,7 @@ public class LocationAssistant
         }
     };
 
-    private View.OnClickListener onGoToDevSettingsFromView = new View.OnClickListener() {
+    private final View.OnClickListener onGoToDevSettingsFromView = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
             if (activity != null) {
@@ -632,7 +625,7 @@ public class LocationAssistant
         }
     };
 
-    private DialogInterface.OnClickListener onGoToAppSettingsFromDialog = new DialogInterface.OnClickListener() {
+    private final DialogInterface.OnClickListener onGoToAppSettingsFromDialog = new DialogInterface.OnClickListener() {
         @Override
         public void onClick(DialogInterface dialog, int which) {
             if (activity != null) {
@@ -648,7 +641,7 @@ public class LocationAssistant
         }
     };
 
-    private View.OnClickListener onGoToAppSettingsFromView = new View.OnClickListener() {
+    private final View.OnClickListener onGoToAppSettingsFromView = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
             if (activity != null) {
@@ -726,7 +719,7 @@ public class LocationAssistant
                     connectionResult.getErrorMessage());
     }
 
-    ResultCallback<LocationSettingsResult> onLocationSettingsReceived = new ResultCallback<LocationSettingsResult>() {
+    private final ResultCallback<LocationSettingsResult> onLocationSettingsReceived = new ResultCallback<LocationSettingsResult>() {
         @Override
         public void onResult(@NonNull LocationSettingsResult result) {
             locationRequested = true;
