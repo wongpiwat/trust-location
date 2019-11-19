@@ -50,7 +50,9 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
     LatLongPosition position;
     bool isMockLocation;
     try {
+      /// query the current location.
       position = await TrustLocation.getLatLong;
+      /// check mock location.
       isMockLocation = await TrustLocation.isMockLocation;
     } on PlatformException catch (e) {
       print('PlatformException $e');
