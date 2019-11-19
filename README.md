@@ -23,16 +23,13 @@ Add either the `ACCESS_COARSE_LOCATION` or the `ACCESS_FINE_LOCATION` permission
 
 ```dart
 import 'package:trust_location/trust_location.dart';
-...
 
 /* Assuming in an async function */
-
 /// query the current location.
 LatLongPosition position = await TrustLocation.getLatLong;
 
 /// check mock location on Android device.
 bool isMockLocation = await TrustLocation.isMockLocation;
-...
 ```
 
 ## Example
@@ -79,7 +76,9 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
     LatLongPosition position;
     bool isMockLocation;
     try {
+      /// query the current location.
       position = await TrustLocation.getLatLong;
+      /// check mock location.
       isMockLocation = await TrustLocation.isMockLocation;
     } on PlatformException catch (e) {
       print('PlatformException $e');
@@ -139,7 +138,7 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
 }
 ```
 
-## Credits
+## Credit
 
 Detecting the mock location: [LocationAssistant](https://github.com/klaasnotfound/LocationAssistant)
 
