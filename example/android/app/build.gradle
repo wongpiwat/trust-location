@@ -33,7 +33,7 @@ android {
 
     defaultConfig {
         applicationId "com.wongpiwat.trust_location_example"
-        minSdkVersion 18
+        minSdkVersion 21
         targetSdkVersion 29
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName

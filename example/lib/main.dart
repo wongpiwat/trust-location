@@ -13,42 +13,33 @@ class MyApp extends StatefulWidget {
   _MyAppState createState() => _MyAppState();
 }
 
-class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
+class _MyAppState extends State<MyApp> {
   String _latitude;
   String _longitude;
-  bool _isMockLocation = false;
-  Timer getLocationTimer;
+  bool _isMockLocation;
 
   /// initialize state.
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance.addObserver(this);
     requestLocationPermission();
-    executeGetLocation();
-  }
-
-  /// calling get location every 5 seconds.
-  void executeGetLocation() {
-    getLocationTimer =
-        Timer.periodic(Duration(seconds: 5), (Timer t) => _getLocation());
+    // input seconds into parameter for getting location with repeating by timer.
+    // this example set to 5 seconds.
+    TrustLocation.start(5);
+    _getLocation();
   }
 
   /// get location method, use a try/catch PlatformException.
   Future<void> _getLocation() async {
-    LatLongPosition position;
-    bool isMockLocation;
     try {
-      position = await TrustLocation.getLatLong;
-      isMockLocation = await TrustLocation.isMockLocation;
+      TrustLocation.onChange.listen((values) => setState(() {
+            _latitude = values.latitude;
+            _longitude = values.longitude;
+            _isMockLocation = values.isMockLocation;
+          }));
     } on PlatformException catch (e) {
       print('PlatformException $e');
     }
-    setState(() {
-      _latitude = position.latitude;
-      _longitude = position.longitude;
-      _isMockLocation = isMockLocation;
-    });
   }
 
   /// request location permission at runtime.
@@ -56,24 +47,6 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
     PermissionStatus permission =
         await LocationPermissions().requestPermissions();
     print('permissions: $permission');
-  }
-
-  /// check app state resume or inactive.
-  @override
-  void didChangeAppLifecycleState(AppLifecycleState state) {
-    if (state == AppLifecycleState.resumed) {
-      executeGetLocation();
-    }
-    if (state == AppLifecycleState.inactive) {
-      getLocationTimer.cancel();
-    }
-  }
-
-  /// unregister the WidgetsBindingObserver.
-  @override
-  void dispose() {
-    WidgetsBinding.instance.removeObserver(this);
-    super.dispose();
   }
 
   @override

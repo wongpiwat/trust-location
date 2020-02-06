@@ -1,3 +1,8 @@
+## 2.0.9
+
+* Add stream by calling the listen function.
+* Upgrade Android minimum API Level 21.
+
 ## 2.0.8
 
 * Fix condition within `onMethodCall` method.
