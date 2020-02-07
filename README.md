@@ -78,11 +78,11 @@ class _MyAppState extends State<MyApp> {
     // input seconds into parameter for getting location with repeating by timer.
     // this example set to 5 seconds.
     TrustLocation.start(5);
-    _getLocation();
+    getLocation();
   }
 
   /// get location method, use a try/catch PlatformException.
-  Future<void> _getLocation() async {
+  Future<void> getLocation() async {
     try {
       TrustLocation.onChange.listen((values) => setState(() {
             _latitude = values.latitude;
