@@ -1,3 +1,7 @@
+## 2.0.10
+
+* Add broadcast stream.
+
 ## 2.0.9
 
 * Add stream by calling the listen function.

@@ -4,7 +4,7 @@ import 'package:flutter/services.dart';
 
 class TrustLocation {
   static const MethodChannel _channel = const MethodChannel('trust_location');
-  static var changeController = new StreamController<LatLongPosition>();
+  static var changeController = new StreamController<LatLongPosition>.broadcast();
   static Timer getLocationTimer;
 
   /// start get location with repeating by timer
