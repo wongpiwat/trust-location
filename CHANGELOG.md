@@ -1,4 +1,4 @@
-## 2.0.10
+## 2.0.11
 
 * Add description to support only high accuracy location mode.
 
