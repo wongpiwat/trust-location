@@ -1,6 +1,7 @@
 # Trust Location
 
-A Flutter plugin for detecting mock location on Android device.
+A Flutter plugin for detecting mock location on Android device. (Supports only high accuracy location mode)
+Please enable high accuracy in Android settings before using this plugin. [Read more](https://support.google.com/nexus/answer/3467281?hl=en)
 
 ## Installation
 

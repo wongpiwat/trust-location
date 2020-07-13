@@ -1,5 +1,9 @@
 ## 2.0.10
 
+* Add description to support only high accuracy location mode.
+
+## 2.0.10
+
 * Add broadcast stream.
 
 ## 2.0.9
