@@ -1,3 +1,7 @@
+## 2.0.12
+
+* Add null safety feature.
+
 ## 2.0.11
 
 * Add description to support only high accuracy location mode.
