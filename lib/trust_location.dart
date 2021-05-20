@@ -4,8 +4,9 @@ import 'package:flutter/services.dart';
 
 class TrustLocation {
   static const MethodChannel _channel = const MethodChannel('trust_location');
-  static var changeController = new StreamController<LatLongPosition>.broadcast();
-  static Timer getLocationTimer;
+  static var changeController =
+      new StreamController<LatLongPosition>.broadcast();
+  static Timer? getLocationTimer;
 
   /// start get location with repeating by timer
   static start(time) {
@@ -15,7 +16,7 @@ class TrustLocation {
 
   /// stop repeating by timer
   static stop() {
-    getLocationTimer.cancel();
+    getLocationTimer?.cancel();
   }
 
   /// get location and mock
@@ -54,20 +55,20 @@ class TrustLocation {
 }
 
 class LatLongPosition {
-  final String _latitude;
-  final String _longitude;
-  final bool _isMock;
+  final String? _latitude;
+  final String? _longitude;
+  final bool? _isMock;
 
   LatLongPosition([this._latitude, this._longitude, this._isMock]);
 
   /// get latitude.
-  String get latitude => _latitude;
+  String? get latitude => _latitude;
 
   /// get longitude.
-  String get longitude => _longitude;
+  String? get longitude => _longitude;
 
   /// is mock location.
-  bool get isMockLocation => _isMock;
+  bool? get isMockLocation => _isMock;
 
   /// return the string of latitude and longitude.
   @override
