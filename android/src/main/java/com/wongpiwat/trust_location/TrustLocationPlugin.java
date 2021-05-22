@@ -3,11 +3,11 @@ package com.wongpiwat.trust_location;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.location.Location;
-import android.util.Log;
 import android.view.View;
 
 import androidx.annotation.NonNull;
 
+import io.flutter.embedding.engine.plugins.FlutterPlugin;
 import io.flutter.app.FlutterActivity;
 import io.flutter.plugin.common.MethodCall;
 import io.flutter.plugin.common.MethodChannel;
@@ -17,24 +17,41 @@ import io.flutter.plugin.common.MethodChannel.Result;
 /**
  * TrustLocationPlugin
  */
-public class TrustLocationPlugin extends FlutterActivity implements MethodCallHandler {
+public class TrustLocationPlugin extends FlutterActivity implements FlutterPlugin, MethodCallHandler {
+    private static final String CHANNEL = "trust_location";
     private LocationAssistantListener locationAssistantListener;
-    private final Context context;
+    private final Context context = null;
+    private MethodChannel channel;
+
     /**
      * Plugin registration.
      */
+    @SuppressWarnings("deprecation")
     public static void registerWith(Registrar registrar) {
-        final MethodChannel channel = new MethodChannel(registrar.messenger(), "trust_location");
+        final MethodChannel channel = new MethodChannel(registrar.messenger(), CHANNEL);
         channel.setMethodCallHandler(new TrustLocationPlugin(registrar.context()));
     }
 
+    public TrustLocationPlugin() {
+    }
+
     private TrustLocationPlugin(Context context) {
-        this.context = context;
         locationAssistantListener = new LocationAssistantListener(context);
     }
 
     @Override
-    public void onMethodCall(MethodCall call, @NonNull Result result) {
+    public void onAttachedToEngine(@NonNull FlutterPluginBinding flutterPluginBinding) {
+        channel = new MethodChannel(flutterPluginBinding.getBinaryMessenger(), CHANNEL);
+        channel.setMethodCallHandler(new TrustLocationPlugin(flutterPluginBinding.getApplicationContext()));
+    }
+
+    @Override
+    public void onDetachedFromEngine(@NonNull FlutterPluginBinding binding) {
+        channel.setMethodCallHandler(null);
+    }
+
+    @Override
+    public void onMethodCall(@NonNull MethodCall call, @NonNull Result result) {
         switch (call.method) {
             case "isMockLocation":
                 if (locationAssistantListener.isMockLocationsDetected()) {

@@ -49,7 +49,7 @@ packages:
       name: cupertino_icons
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.1.2"
+    version: "1.0.3"
   fake_async:
     dependency: transitive
     description:
@@ -73,7 +73,7 @@ packages:
       name: location_permissions
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.0.4+1"
+    version: "4.0.0"
   matcher:
     dependency: transitive
     description:
@@ -143,12 +143,12 @@ packages:
     source: hosted
     version: "0.3.0"
   trust_location:
-    dependency: "direct dev"
+    dependency: "direct main"
     description:
       path: ".."
       relative: true
     source: path
-    version: "2.0.12"
+    version: "2.0.13"
   typed_data:
     dependency: transitive
     description:

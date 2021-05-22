@@ -1,3 +1,7 @@
+## 2.0.13
+
+* Fix MissingPluginException.
+
 ## 2.0.12
 
 * Add null safety feature.

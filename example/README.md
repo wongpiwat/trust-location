@@ -25,9 +25,9 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  String _latitude;
-  String _longitude;
-  bool _isMockLocation;
+  String? _latitude;
+  String? _longitude;
+  bool? _isMockLocation;
 
   /// initialize state.
   @override
