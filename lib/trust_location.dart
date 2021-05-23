@@ -21,7 +21,7 @@ class TrustLocation {
 
   /// get location and mock
   static Future<void> getLocation() async {
-    List<String> position;
+    List<String?> position;
     bool isMockLocation;
     try {
       position = await TrustLocation.getLatLong;
@@ -37,9 +37,9 @@ class TrustLocation {
   static Stream<LatLongPosition> get onChange => changeController.stream;
 
   /// query the current location.
-  static Future<List<String>> get getLatLong async {
-    final String latitude = await _channel.invokeMethod('getLatitude');
-    final String longitude = await _channel.invokeMethod('getLongitude');
+  static Future<List<String?>> get getLatLong async {
+    final String? latitude = await _channel.invokeMethod('getLatitude');
+    final String? longitude = await _channel.invokeMethod('getLongitude');
     return [latitude, longitude];
   }
 

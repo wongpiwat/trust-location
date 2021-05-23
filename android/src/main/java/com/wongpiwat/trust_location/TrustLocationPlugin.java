@@ -19,30 +19,27 @@ import io.flutter.plugin.common.MethodChannel.Result;
  */
 public class TrustLocationPlugin extends FlutterActivity implements FlutterPlugin, MethodCallHandler {
     private static final String CHANNEL = "trust_location";
-    private LocationAssistantListener locationAssistantListener;
-    private final Context context = null;
+    private static LocationAssistantListener locationAssistantListener;
+    private static Context context;
     private MethodChannel channel;
-
-    /**
-     * Plugin registration.
-     */
-    @SuppressWarnings("deprecation")
-    public static void registerWith(Registrar registrar) {
-        final MethodChannel channel = new MethodChannel(registrar.messenger(), CHANNEL);
-        channel.setMethodCallHandler(new TrustLocationPlugin(registrar.context()));
-    }
 
     public TrustLocationPlugin() {
     }
 
-    private TrustLocationPlugin(Context context) {
+    @SuppressWarnings("deprecation")
+    public static void registerWith(Registrar registrar) {
+        final MethodChannel channel = new MethodChannel(registrar.messenger(), CHANNEL);
+        channel.setMethodCallHandler(new TrustLocationPlugin());
+        context = registrar.context();
         locationAssistantListener = new LocationAssistantListener(context);
     }
 
     @Override
     public void onAttachedToEngine(@NonNull FlutterPluginBinding flutterPluginBinding) {
         channel = new MethodChannel(flutterPluginBinding.getBinaryMessenger(), CHANNEL);
-        channel.setMethodCallHandler(new TrustLocationPlugin(flutterPluginBinding.getApplicationContext()));
+        channel.setMethodCallHandler(new TrustLocationPlugin());
+        context = flutterPluginBinding.getApplicationContext();
+        locationAssistantListener = new LocationAssistantListener(context);
     }
 
     @Override
